@@ -411,6 +411,20 @@
                 display: none;
             }
         }
+        /* Ajustes para geração de PDF */
+        .generating-pdf * {
+            transition: none !important; /* Remove transições para evitar erros de renderização */
+        }
+        .generating-pdf details {
+            break-inside: avoid; /* Evita quebra de página dentro de seções */
+            page-break-inside: avoid;
+        }
+        /* Oculta botões específicos durante a geração do PDF, mantendo o Editar */
+        .generating-pdf .btn-download,
+        .generating-pdf .btn-print,
+        .generating-pdf .btn-share {
+            display: none !important;
+        }
         /* Classe auxiliar para ocultar botões durante a geração do PDF */
         .pdf-mode .btn-download,
         .pdf-mode .btn-print,
@@ -692,22 +706,40 @@
             // Função auxiliar para gerar PDF
             function generatePDF(callback) {
                 const element = document.querySelector('.container');
-                const actionButtons = document.querySelector('.action-buttons');
                 
-                // Adiciona classe para ocultar botões indesejados no PDF
-                actionButtons.classList.add('pdf-mode');
+                // Prepara o ambiente para o PDF (adiciona classe ao body)
+                document.body.classList.add('generating-pdf');
+                
+                // Expande todos os details para garantir que o conteúdo saia no PDF
+                const allDetails = element.querySelectorAll('details');
+                const detailsState = [];
+                allDetails.forEach((detail, index) => {
+                    detailsState[index] = detail.open;
+                    detail.open = true;
+                });
 
                 const opt = {
-                    margin:       5,
+                    margin:       [10, 10, 10, 10], // Margens maiores para evitar cortes
                     filename:     'Roteiro_Handover_Documentacao.pdf',
                     image:        { type: 'jpeg', quality: 0.98 },
-                    html2canvas:  { scale: 2, useCORS: true },
-                    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                    html2canvas:  { 
+                        scale: 2, 
+                        useCORS: true, 
+                        scrollY: 0, // Evita cortes se a página estiver rolada
+                        windowWidth: 1200 // Garante layout consistente
+                    },
+                    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                    pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] } // Evita quebras de página no meio de elementos
                 };
 
                 // Gera o PDF e depois restaura os botões
                 html2pdf().set(opt).from(element).save().then(function() {
-                    actionButtons.classList.remove('pdf-mode');
+                    // Restaura o estado original
+                    document.body.classList.remove('generating-pdf');
+                    allDetails.forEach((detail, index) => {
+                        detail.open = detailsState[index];
+                    });
+
                     if (callback) callback();
                 });
             }
