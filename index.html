@@ -3,6 +3,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Roteiro de Handover de Documentação - GRAP EVOTECH</title>
 <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" referrerpolicy="no-referrer" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
         /* --- Reset e Configurações Globais --- */
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
@@ -349,8 +350,14 @@
                 padding: 0;
                 max-width: 100%;
             }
-            .action-buttons, .header h1 {
+            .header h1 {
                 display: none;
+            }
+            .action-buttons {
+                display: flex !important;
+            }
+            .btn-download, .btn-print, .btn-share {
+                display: none !important;
             }
             .header {
                 background-color: var(--color-header-bg) !important;
@@ -404,6 +411,12 @@
                 display: none;
             }
         }
+        /* Classe auxiliar para ocultar botões durante a geração do PDF */
+        .pdf-mode .btn-download,
+        .pdf-mode .btn-print,
+        .pdf-mode .btn-share {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -419,7 +432,7 @@
 <button class="action-button btn-download" id="downloadBtn"><i class="fas fa-download"></i> Baixar Documento</button>
 <button class="action-button btn-print" id="printBtn"><i class="fas fa-print"></i> Imprimir</button>
 <a class="action-button btn-share" href="https://docs.google.com/document/create" id="shareBtn" target="_blank"><i class="fas fa-file-alt"></i> Compartilhar no Docs</a>
-<a class="action-button btn-edit" href="#"><i class="fas fa-edit"></i> Editar</a>
+<a class="action-button btn-edit" href="https://roteiro-documentacao.vercel.app/"><i class="fas fa-edit"></i> Editar</a>
 </div>
 <section id="part-i">
 <details>
@@ -678,16 +691,24 @@
 
             // Botão de Baixar
             document.getElementById('downloadBtn').addEventListener('click', function() {
-                const htmlContent = document.documentElement.outerHTML;
-                const blob = new Blob([htmlContent], { type: 'text/html' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'Roteiro_Handover_Documentacao.html';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
+                const element = document.querySelector('.container');
+                const actionButtons = document.querySelector('.action-buttons');
+                
+                // Adiciona classe para ocultar botões indesejados no PDF
+                actionButtons.classList.add('pdf-mode');
+
+                const opt = {
+                    margin:       5,
+                    filename:     'Roteiro_Handover_Documentacao.pdf',
+                    image:        { type: 'jpeg', quality: 0.98 },
+                    html2canvas:  { scale: 2, useCORS: true },
+                    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+
+                // Gera o PDF e depois restaura os botões
+                html2pdf().set(opt).from(element).save().then(function() {
+                    actionButtons.classList.remove('pdf-mode');
+                });
             });
 
             // Botão de Compartilhar (abre novo doc e avisa para colar)
