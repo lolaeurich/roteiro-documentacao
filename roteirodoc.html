@@ -1,0 +1,706 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Roteiro de Handover de Documentação - GRAP EVOTECH</title>
+<link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" referrerpolicy="no-referrer" rel="stylesheet"/>
+<style>
+        /* --- Reset e Configurações Globais --- */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+        :root {
+            --color-primary: #003366; /* Azul Corporativo Escuro */
+            --color-secondary: #005A9C; /* Azul Corporativo Médio */
+            --color-accent: #4A90E2; /* Azul Corporativo Claro */
+            --color-progress: #2E8B57; /* Verde para progresso */
+            --color-text: #333333;
+            --color-light-gray: #f4f7fa;
+            --color-border: #dce4ec;
+            --color-header-bg: #000000;
+            --color-white: #ffffff;
+            --color-button-download: #c0392b;
+            --color-button-print: #2980b9;
+            --color-button-share: #27ae60;
+            --color-button-edit: #f39c12;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            background-color: var(--color-light-gray);
+            color: var(--color-text);
+            font-size: 16px;
+        }
+
+        /* --- Estrutura Principal --- */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--color-white);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-radius: 10px;
+            border: 1px solid var(--color-border);
+        }
+
+        /* --- Cabeçalho --- */
+        .header {
+            background-color: var(--color-header-bg);
+            color: var(--color-white);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .header .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .header .logo {
+            height: 50px;
+            margin-right: 20px;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        /* --- Botões de Ação --- */
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--color-border);
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .action-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            color: var(--color-white);
+            font-size: 1em;
+            cursor: pointer;
+            transition: opacity 0.3s ease, transform 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .action-button:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+        }
+        .btn-download { background-color: var(--color-button-download); }
+        .btn-print { background-color: var(--color-button-print); }
+        .btn-share { background-color: var(--color-button-share); }
+        .btn-edit { background-color: var(--color-button-edit); }
+
+        /* --- Seções Colapsáveis (<details> e <summary>) --- */
+        details {
+            background-color: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        details[open] {
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        summary {
+            padding: 15px 20px;
+            font-size: 1.3em;
+            font-weight: 500;
+            color: var(--color-primary);
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 8px;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: '\f078'; /* Chevron Down */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            transition: transform 0.3s ease;
+            color: var(--color-accent);
+        }
+
+        details[open] > summary::after {
+            transform: rotate(180deg);
+        }
+
+        .details-content {
+            padding: 0 20px 20px 20px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .details-content h3 {
+            color: var(--color-secondary);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            border-bottom: 2px solid var(--color-accent);
+            padding-bottom: 5px;
+        }
+
+        .details-content p, .details-content ul {
+            margin-bottom: 15px;
+        }
+        
+        .details-content ul {
+            padding-left: 20px;
+        }
+
+        .details-content li {
+            margin-bottom: 8px;
+        }
+
+        /* --- Parte II: Checklist --- */
+        #part-ii h2 {
+            font-size: 1.8em;
+            color: var(--color-primary);
+            margin-bottom: 10px;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--color-secondary);
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            background-color: var(--color-border);
+            border-radius: 25px;
+            height: 25px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background-color: var(--color-progress);
+            border-radius: 25px;
+            transition: width 0.5s ease-in-out;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            line-height: 25px;
+        }
+
+        .checklist-item summary {
+            font-size: 1.1em;
+            background-color: var(--color-light-gray);
+        }
+
+        details.completed > summary {
+            background-color: #e8f5e9; /* Verde claro */
+            color: var(--color-progress);
+        }
+
+        details.completed > summary::before {
+            content: '\f058'; /* Check Circle */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--color-progress);
+            margin-right: 10px;
+        }
+
+        .checklist {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+
+        .checklist input[type="checkbox"] {
+            margin-right: 15px;
+            margin-top: 5px;
+            min-width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checklist label {
+            cursor: pointer;
+            flex-grow: 1;
+        }
+
+        .checklist li.checked label {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        /* --- Estilos de Conteúdo Específico --- */
+        .flow-diagram {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+        .flow-step {
+            background-color: var(--color-accent);
+            color: var(--color-white);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 150px;
+            margin: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .flow-arrow {
+            font-size: 2em;
+            color: var(--color-secondary);
+            margin: 5px 10px;
+        }
+
+        .role-description {
+            background-color: #eef4fb;
+            border-left: 5px solid var(--color-secondary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .declaration-section {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: var(--color-light-gray);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+        }
+        .declaration-section h3 {
+            border: none;
+        }
+        .signature-fields {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .signature-field {
+            display: flex;
+            flex-direction: column;
+        }
+        .signature-field label {
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: var(--color-primary);
+        }
+        .signature-field input {
+            padding: 10px;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        .signature-field .signature-line {
+            border-bottom: 1px solid var(--color-text);
+            height: 40px;
+            margin-top: 20px;
+        }
+
+        /* --- Estilos de Impressão --- */
+        @media print {
+            body {
+                background-color: var(--color-white);
+                font-size: 12pt;
+            }
+            .container {
+                box-shadow: none;
+                border: none;
+                margin: 0;
+                padding: 0;
+                max-width: 100%;
+            }
+            .action-buttons, .header h1 {
+                display: none;
+            }
+            .header {
+                background-color: var(--color-header-bg) !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+                padding: 10px;
+                justify-content: flex-start;
+            }
+            .header .logo {
+                height: 40px;
+            }
+            details {
+                page-break-inside: avoid;
+                border: 1px solid #ccc;
+            }
+            details[open] {
+                box-shadow: none;
+            }
+            details summary {
+                background-color: #eee !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            summary::after {
+                display: none;
+            }
+            .checklist input[type="checkbox"] {
+                appearance: none;
+                -webkit-appearance: none;
+                border: 1px solid #000;
+                width: 12px;
+                height: 12px;
+                margin-top: 4px;
+                vertical-align: middle;
+            }
+            .checklist input[type="checkbox"]:checked {
+                background-color: #000 !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+                position: relative;
+            }
+            .checklist input[type="checkbox"]:checked::after {
+                content: '';
+                display: block;
+            }
+            .checklist li.checked label {
+                text-decoration: none;
+                color: #000;
+            }
+            .progress-container {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<header class="header">
+<div class="logo-container">
+<img alt="GRAP EVOTECH Logo" class="logo" src="./786_grap_marca_Prancheta-1-cópia-5-_1_ (1).jpg"/>
+</div>
+<h1 id="section-1">Roteiro de Handover de Documentação</h1>
+</header>
+<main>
+<div class="action-buttons">
+<button class="action-button btn-download" id="downloadBtn"><i class="fas fa-download"></i> Baixar Documento</button>
+<button class="action-button btn-print" id="printBtn"><i class="fas fa-print"></i> Imprimir</button>
+<a class="action-button btn-share" href="https://docs.google.com/document/create" id="shareBtn" target="_blank"><i class="fas fa-file-alt"></i> Compartilhar no Docs</a>
+<a class="action-button btn-edit" href="#"><i class="fas fa-edit"></i> Editar</a>
+</div>
+<section id="part-i">
+<details>
+<summary>Parte I - Visão Geral do Fluxo de Documentação</summary>
+<div class="details-content">
+<p>A documentação de um projeto não é um artefato estático, mas um ecossistema vivo que evolui com o desenvolvimento. Um fluxo de documentação bem estruturado é a espinha dorsal do conhecimento do projeto, garantindo que a informação seja clara, acessível e útil para todas as partes interessadas, desde desenvolvedores até usuários finais. A Arquitetura da Informação (AI) é a disciplina que nos guia na organização e rotulagem desse ecossistema, transformando um volume massivo de dados em um sistema navegável e intuitivo.</p>
+<h3 id="section-0-1">Visão Geral do Fluxo de Documentação</h3>
+<p>O processo de documentação segue uma jornada lógica, espelhando o ciclo de vida do desenvolvimento de software. Cada etapa gera artefatos que servem de base para a próxima, criando uma cadeia de valor informacional.</p>
+<div class="flow-diagram">
+<div class="flow-step">ERU</div>
+<div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+<div class="flow-step">EF</div>
+<div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+<div class="flow-step">Desenvolvimento &amp; Testes</div>
+<div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+<div class="flow-step">Manual do Sistema</div>
+</div>
+<h3 id="section-0-2">ERU – Especificação de Requisitos de Usuário</h3>
+<p>A ERU é o ponto de partida. Seu objetivo é capturar as necessidades, dores e expectativas do usuário. Este documento responde à pergunta: &#34;O que o usuário precisa fazer?&#34;. Ele é fundamentalmente centrado no usuário, utilizando técnicas de UX (User Experience) como entrevistas, jornadas de usuário e personas para definir o escopo do problema a ser resolvido, sem se aprofundar em detalhes técnicos de implementação.</p>
+<h3 id="section-0-3">EF – Especificação Funcional</h3>
+<p>A EF traduz os requisitos do usuário (o &#34;quê&#34;) em especificações técnicas para a equipe de desenvolvimento (o &#34;como&#34;). Ela detalha as funcionalidades do sistema, regras de negócio, fluxos de interação, requisitos de dados e critérios de aceite. Uma boa EF é clara, concisa e inequívoca, servindo como um contrato entre as áreas de negócio e tecnologia. Ela deve ser estruturada com títulos autoexplicativos e, quando necessário, usar diagramas para ilustrar fluxos complexos.</p>
+<h3 id="section-0-4">Testes (Dev)</h3>
+<p>A documentação de testes, incluindo planos e casos de teste, deriva diretamente da Especificação Funcional. Para cada funcionalidade descrita na EF, deve haver um ou mais casos de teste que verifiquem se a implementação atende aos critérios de aceite. Isso garante a rastreabilidade e a qualidade do software, assegurando que o produto final se comporta conforme o especificado.</p>
+<h3 id="section-0-5">Manual do Sistema</h3>
+<p>O Manual do Sistema é a principal fonte de conhecimento para o usuário final. Ele deve ser escrito em linguagem simples e direta, evitando jargão técnico. O uso de recursos visuais como screenshots anotados, GIFs e vídeos é crucial para facilitar a compreensão. Uma prática eficaz é estruturar o manual em seções claras, como &#34;Como utilizar&#34; e &#34;Como não utilizar&#34;, para guiar o usuário nas melhores práticas e prevenir erros comuns.</p>
+<h3 id="section-0-6">Matriz de Documentação</h3>
+<p>A Matriz de Documentação é uma ferramenta de governança e gestão. Trata-se de um painel de controle (dashboard) que lista todos os documentos relevantes do projeto, seus responsáveis, status (Ex: Em elaboração, Em revisão, Aprovado), versão atual e data da última atualização. Ela oferece uma visão panorâmica do estado da documentação, facilitando o rastreamento e garantindo que todos os artefatos estejam atualizados.</p>
+<h3 id="section-0-7">Minuta de Reunião</h3>
+<p>As minutas são registros formais das discussões e decisões tomadas em reuniões. Elas são essenciais para a continuidade do projeto, pois formalizam responsabilidades, prazos e próximos passos. Uma minuta bem elaborada evita ambiguidades e serve como um ponto de referência para alinhar a equipe e resolver futuras divergências.</p>
+<div class="role-description">
+<h3 id="section-0-8">Papel do Analista de Documentação</h3>
+<p>O Analista de Documentação atua como o arquiteto da informação do projeto. Ele não é apenas um escritor técnico, mas um estrategista que projeta e mantém a estrutura de conhecimento. Suas responsabilidades incluem: garantir a clareza e consistência entre todos os documentos, facilitar a comunicação entre equipes técnicas e não técnicas, definir padrões de documentação e assegurar que a informação seja facilmente acessível e compreensível para seu público-alvo. Este profissional é o guardião da clareza e da usabilidade da informação do projeto.</p>
+</div>
+</div>
+</details>
+</section>
+<section id="part-ii">
+<h2 id="section-1">Parte II - Checklist de Handover</h2>
+<div class="progress-container">
+<div class="progress-label">
+<span>Progresso Geral</span>
+<span id="progress-text">0%</span>
+</div>
+<div class="progress-bar-bg">
+<div class="progress-bar" id="progress-bar"></div>
+</div>
+</div>
+<details class="checklist-item" id="section-1">
+<summary>1. Visão Geral do Projeto</summary>
+<div class="details-content">
+<p>Documentos que fornecem o contexto geral, objetivos e partes interessadas do projeto.</p>
+<ul class="checklist">
+<li><input id="chk1-1" type="checkbox"/><label for="chk1-1">Documento de Visão do Projeto (Project Charter) localizado e revisado.</label></li>
+<li><input id="chk1-2" type="checkbox"/><label for="chk1-2">Lista de stakeholders (partes interessadas) e seus papéis identificada.</label></li>
+<li><input id="chk1-3" type="checkbox"/><label for="chk1-3">Objetivos e Resultados Chave (OKRs) do projeto compreendidos.</label></li>
+<li><input id="chk1-4" type="checkbox"/><label for="chk1-4">Diagrama de arquitetura de alto nível acessado e entendido.</label></li>
+<li><input id="chk1-5" type="checkbox"/><label for="chk1-5">Acesso concedido às ferramentas de gerenciamento de projeto (Jira, Asana, etc.).</label></li>
+</ul>
+</div>
+</details>
+<details class="checklist-item" id="section-2">
+<summary>2. ERU – Especificação de Requisitos de Usuário</summary>
+<div class="details-content">
+<p>Verificação da documentação que captura as necessidades do usuário.</p>
+<ul class="checklist">
+<li><input id="chk2-1" type="checkbox"/><label for="chk2-1">Versão final da ERU, devidamente aprovada, foi recebida.</label></li>
+<li><input id="chk2-2" type="checkbox"/><label for="chk2-2">Assinaturas ou confirmações de aprovação dos stakeholders chave verificadas.</label><em data-skywork="text_badge" data-sk-source-type="web_search" data-sk-source-text="Assinaturas ou confirmações de aprovação dos stakeholders chave verificadas." id="skTag-2008563989103439874" class="sk-source-tag" data-sk-source-id="2008563989103439874" data-sk-source-website-name="youtube.com" data-sk-source-website-url="https://www.youtube.com/watch?v=nK6YQ_nLjRQ" data-sk-source-source-id="2008563989095452674"></em></li>
+<li><input id="chk2-3" type="checkbox"/><label for="chk2-3">Repositório de User Stories ou Casos de Uso acessado.</label></li>
+<li><input id="chk2-4" type="checkbox"/><label for="chk2-4">Acesso aos wireframes e mockups de baixa/média fidelidade que deram origem à ERU.</label></li>
+</ul>
+</div>
+</details>
+<details class="checklist-item" id="section-3">
+<summary>3. EF – Especificação Funcional</summary>
+<div class="details-content">
+<p>Análise da tradução dos requisitos de usuário em especificações técnicas.</p>
+<ul class="checklist">
+<li><input id="chk3-1" type="checkbox"/><label for="chk3-1">Versão final da EF, devidamente aprovada, foi recebida.</label></li>
+<li><input id="chk3-2" type="checkbox"/><label for="chk3-2">Mapeamento de rastreabilidade entre requisitos da ERU e itens da EF verificado.</label><em data-skywork="text_badge" data-sk-source-type="web_search" data-sk-source-text="Mapeamento de rastreabilidade entre requisitos da ERU e itens da EF verificado." id="skTag-2008563790079520768" class="sk-source-tag" data-sk-source-id="2008563790079520768" data-sk-source-website-name="visme.co" data-sk-source-website-url="https://visme.co/blog/pt-br/manual-de-procedimentos/" data-sk-source-source-id="2008563790071533568"></em></li>
+<li><input id="chk3-3" type="checkbox"/><label for="chk3-3">Dicionário de Dados e Modelo de Entidade e Relacionamento (MER) localizados.</label></li>
+<li><input id="chk3-4" type="checkbox"/><label for="chk3-4">Especificações de APIs (endpoints, payloads, respostas) revisadas.</label></li>
+<li><input id="chk3-5" type="checkbox"/><label for="chk3-5">Requisitos Não Funcionais (desempenho, segurança, escalabilidade) documentados.</label></li>
+</ul>
+</div>
+</details>
+<details class="checklist-item" id="section-4">
+<summary>4. Desenvolvimento</summary>
+<div class="details-content">
+<p>Acesso e compreensão dos artefatos e processos da equipe de desenvolvimento.</p>
+<ul class="checklist">
+<li><input id="chk4-1" type="checkbox"/><label for="chk4-1">Acesso de leitura ao repositório de código-fonte (ex: GitHub, GitLab).</label></li>
+<li><input id="chk4-2" type="checkbox"/><label for="chk4-2">Documentação da estratégia de branches (ex: GitFlow) compreendida.</label></li>
+<li><input id="chk4-3" type="checkbox"/><label for="chk4-3">Guia de configuração do ambiente de desenvolvimento (setup) revisado.</label><em data-skywork="text_badge" data-sk-source-type="web_search" data-sk-source-text="Guia de configuração do ambiente de desenvolvimento (setup) revisado." id="skTag-2008564158570524672" class="sk-source-tag" data-sk-source-id="2008564158570524672" data-sk-source-website-name="codejourney.com.br" data-sk-source-website-url="https://codejourney.com.br/conceitos-isolados-do-clean-code/" data-sk-source-source-id="2008564158553722880"></em></li>
+<li><input id="chk4-4" type="checkbox"/><label for="chk4-4">Lista de bibliotecas, frameworks e dependências críticas do projeto identificada.</label></li>
+<li><input id="chk4-5" type="checkbox"/><label for="chk4-5">Documentação sobre o processo de build e deploy (CI/CD) localizada.</label></li>
+</ul>
+</div>
+</details>
+<details class="checklist-item" id="section-5">
+<summary>5. Roteiro de Testes (Dev / HML)</summary>
+<div class="details-content">
+<p>Verificação da documentação e resultados relacionados à garantia de qualidade.</p>
+<ul class="checklist">
+<li><input id="chk5-1" type="checkbox"/><label for="chk5-1">Plano de Testes geral do projeto revisado.</label></li>
+<li><input id="chk5-2" type="checkbox"/><label for="chk5-2">Repositório de Casos de Teste (funcionais, integração, regressão) acessado.</label></li>
+<li><input id="chk5-3" type="checkbox"/><label for="chk5-3">Relatórios de execução dos testes unitários e de integração disponíveis.</label><em data-skywork="text_badge" data-sk-source-type="web_search" data-sk-source-text="Relatórios de execução dos testes unitários e de integração disponíveis." id="skTag-2008563508209709056" class="sk-source-tag" data-sk-source-id="2008563508209709056" data-sk-source-website-name="canva.com" data-sk-source-website-url="https://www.canva.com/pt_br/documentos/relatorio-status-projeto/" data-sk-source-source-id="2008563508201721856"></em></li>
+<li><input id="chk5-4" type="checkbox"/><label for="chk5-4">Acesso ao sistema de rastreamento de bugs (ex: Jira, Bugzilla) com histórico de defeitos.</label></li>
+<li><input id="chk5-5" type="checkbox"/><label for="chk5-5">Evidências de testes de homologação (HML) com o usuário final arquivadas.</label></li>
+</ul>
+</div>
+</details>
+<details class="checklist-item" id="section-6">
+<summary>6. Manual do Sistema</summary>
+<div class="details-content">
+<p>Análise da documentação voltada para o usuário final e administradores.</p>
+<ul class="checklist">
+<li><input id="chk6-1" type="checkbox"/><label for="chk6-1">Manual do Usuário (versão online ou PDF) revisado quanto à clareza e completude.</label><em data-skywork="text_badge" data-sk-source-type="web_search" data-sk-source-text="Manual do Usuário (versão online ou PDF) revisado quanto à clareza e completude." id="skTag-2008564158570524675" class="sk-source-tag" data-sk-source-id="2008564158570524675" data-sk-source-website-name="www.gov.br" data-sk-source-website-url="https://www.gov.br/anp/pt-br/centrais-de-conteudo/publicacoes/cartilhas-e-guias/guiapadronizacaooficialanp.pdf" data-sk-source-source-id="2008564158553722882"></em></li>
+<li><input id="chk6-2" type="checkbox"/><label for="chk6-2">Manual do Administrador (se aplicável) com instruções de configuração e manutenção.</label><em data-skywork="text_badge" data-sk-source-type="web_search" data-sk-source-text="Manual do Administrador (se aplicável) com instruções de configuração e manutenção." id="skTag-2008563790079520768" class="sk-source-tag" data-sk-source-id="2008563790079520768" data-sk-source-website-name="visme.co" data-sk-source-website-url="https://visme.co/blog/pt-br/manual-de-procedimentos/" data-sk-source-source-id="2008563790071533568"></em></li>
+<li><input id="chk6-3" type="checkbox"/><label for="chk6-3">Guia de Início Rápido (Quick Start Guide) para novos usuários.</label></li>
+<li><input id="chk6-4" type="checkbox"/><label for="chk6-4">Seção de Perguntas Frequentes (FAQ) atualizada.</label><em data-skywork="text_badge" data-sk-source-type="web_search" data-sk-source-text="Seção de Perguntas Frequentes (FAQ) atualizada." id="skTag-2008563988968587264" class="sk-source-tag" data-sk-source-id="2008563988968587264" data-sk-source-website-name="youtube.com" data-sk-source-website-url="https://www.youtube.com/watch?v=9AXu4-OTieE" data-sk-source-source-id="2008563988957040640"></em></li>
+<li><input id="chk6-5" type="checkbox"/><label for="chk6-5">Links para tutoriais em vídeo ou outros materiais de treinamento verificados.</label><em data-skywork="text_badge" data-sk-source-type="web_search" data-sk-source-text="Links para tutoriais em vídeo ou outros materiais de treinamento verificados." id="skTag-2008563989103439874" class="sk-source-tag" data-sk-source-id="2008563989103439874" data-sk-source-website-name="youtube.com" data-sk-source-website-url="https://www.youtube.com/watch?v=nK6YQ_nLjRQ" data-sk-source-source-id="2008563989095452674"></em></li>
+</ul>
+</div>
+</details>
+<details class="checklist-item" id="section-7">
+<summary>7. Matriz de Documentação</summary>
+<div class="details-content">
+<p>Verificação da ferramenta central de controle de documentos.<em data-skywork="text_badge" data-sk-source-type="web_search" data-sk-source-text="Verificação da ferramenta central de controle de documentos." id="skTag-2008563988683374592" class="sk-source-tag" data-sk-source-id="2008563988683374592" data-sk-source-website-name="adobe.com" data-sk-source-website-url="https://helpx.adobe.com/br/acrobat/using/previewing-output-acrobat-pro.html" data-sk-source-source-id="2008563988680216576"></em></p>
+<ul class="checklist">
+<li><input id="chk7-1" type="checkbox"/><label for="chk7-1">Acesso à Matriz de Documentação (planilha ou sistema).</label></li>
+<li><input id="chk7-2" type="checkbox"/><label for="chk7-2">Todos os documentos listados neste handover constam na matriz.</label></li>
+<li><input id="chk7-3" type="checkbox"/><label for="chk7-3">Status, versão e responsáveis de cada documento na matriz estão atualizados.</label></li>
+<li><input id="chk7-4" type="checkbox"/><label for="chk7-4">Links para os documentos na matriz estão funcionando corretamente.</label></li>
+</ul>
+</div>
+</details>
+<details class="checklist-item" id="section-8">
+<summary>8. Minutas de Reunião</summary>
+<div class="details-content">
+<p>Revisão do histórico de decisões e alinhamentos do projeto.</p>
+<ul class="checklist">
+<li><input id="chk8-1" type="checkbox"/><label for="chk8-1">Acesso ao repositório central de minutas (ex: Confluence, pasta compartilhada).</label></li>
+<li><input id="chk8-2" type="checkbox"/><label for="chk8-2">Minutas das reuniões de Kick-off, Comitês de Projeto e Sprints revisadas.</label></li>
+<li><input id="chk8-3" type="checkbox"/><label for="chk8-3">Documento de &#34;Sumário de Decisões Chave&#34; foi criado ou localizado.</label><em data-skywork="text_badge" data-sk-source-type="web_search" data-sk-source-text="Documento de &#34;Sumário de Decisões Chave&#34; foi criado ou localizado." id="skTag-2008568392751906816" class="sk-source-tag" data-sk-source-id="2008568392751906816" data-sk-source-website-name="google.com" data-sk-source-website-url="https://support.google.com/docs/answer/12188454?hl=pt" data-sk-source-source-id="2008568392741359616"></em></li>
+<li><input id="chk8-4" type="checkbox"/><label for="chk8-4">Pendências e planos de ação registrados nas minutas foram acompanhados.</label><em data-skywork="text_badge" data-sk-source-type="web_search" data-sk-source-text="Pendências e planos de ação registrados nas minutas foram acompanhados." id="skTag-2008563789941108737" class="sk-source-tag" data-sk-source-id="2008563789941108737" data-sk-source-website-name="bscdesigner.com" data-sk-source-website-url="https://bscdesigner.com/pt/webbsc_manual/product-manual.pdf" data-sk-source-source-id="2008563789937315842"></em></li>
+</ul>
+</div>
+</details>
+<details class="checklist-item" id="section-9">
+<summary>9. Pontos Críticos para Continuidade</summary>
+<div class="details-content">
+<p>Informações essenciais para a operação e sustentação do projeto sem interrupções.</p>
+<ul class="checklist">
+<li><input id="chk9-1" type="checkbox"/><label for="chk9-1">Lista de contatos chave (técnicos, negócio, fornecedores) atualizada.</label></li>
+<li><input id="chk9-2" type="checkbox"/><label for="chk9-2">Procedimento para gestão de credenciais e acessos (senhas, chaves de API) documentado.</label></li>
+<li><input id="chk9-3" type="checkbox"/><label for="chk9-3">Documento de &#34;Problemas Conhecidos e Workarounds&#34; revisado.</label><em data-skywork="text_badge" data-sk-source-type="web_search" data-sk-source-text="Documento de &#34;Problemas Conhecidos e Workarounds&#34; revisado." id="skTag-2008568392751906816" class="sk-source-tag" data-sk-source-id="2008568392751906816" data-sk-source-website-name="google.com" data-sk-source-website-url="https://support.google.com/docs/answer/12188454?hl=pt" data-sk-source-source-id="2008568392741359616"></em></li>
+<li><input id="chk9-4" type="checkbox"/><label for="chk9-4">Plano de Continuidade de Negócios ou Disaster Recovery (se aplicável) localizado.</label></li>
+<li><input id="chk9-5" type="checkbox"/><label for="chk9-5">Informações sobre licenças de software e datas de expiração verificadas.</label><em data-skywork="text_badge" data-sk-source-type="web_search" data-sk-source-text="Informações sobre licenças de software e datas de expiração verificadas." id="skTag-2008564158372331523" class="sk-source-tag" data-sk-source-id="2008564158372331523" data-sk-source-website-name="userguiding.com" data-sk-source-website-url="https://userguiding.com/pt-br/blog/barras-e-indicadores-de-progresso" data-sk-source-source-id="2008564158369173506"></em></li>
+</ul>
+</div>
+</details>
+<details class="checklist-item" id="section-10">
+<summary>10. Orientações Finais ao Sucessor</summary>
+<div class="details-content">
+<p>Transferência de conhecimento tácito e prático para garantir uma transição suave.</p>
+<ul class="checklist">
+<li><input id="chk10-1" type="checkbox"/><label for="chk10-1">Documento descrevendo rotinas diárias e semanais foi elaborado.</label></li>
+<li><input id="chk10-2" type="checkbox"/><label for="chk10-2">Dicas sobre a comunicação e relacionamento com cada stakeholder chave foram compartilhadas.</label></li>
+<li><input id="chk10-3" type="checkbox"/><label for="chk10-3">Lista de melhorias futuras ou débitos técnicos planejados foi entregue.</label></li>
+<li><input id="chk10-4" type="checkbox"/><label for="chk10-4">Sessão de &#34;walkthrough&#34; do projeto e seus artefatos foi realizada.</label></li>
+<li><input id="chk10-5" type="checkbox"/><label for="chk10-5">Canais de comunicação (Slack, Teams) e grupos de e-mail relevantes foram apresentados.</label></li>
+</ul>
+</div>
+</details>
+<details class="checklist-item" id="section-11">
+<summary>11. Declaração de Handover</summary>
+<div class="details-content">
+<div class="declaration-section">
+<h3 id="section-1-1">Termo de Transferência de Responsabilidade</h3>
+<p>Eu, o cedente, declaro que todas as informações, documentos e acessos pertinentes ao projeto, conforme detalhado neste roteiro, foram transferidos de forma completa e transparente para o sucessor. Todos os itens do checklist foram verificados e concluídos, garantindo a continuidade e o bom andamento das atividades.</p>
+<p>O sucessor declara ter recebido e compreendido todas as informações e acessos, sentindo-se apto a assumir as responsabilidades do projeto a partir desta data.</p>
+<div class="signature-fields">
+<div class="signature-field">
+<label for="cedente-nome">Cedente:</label>
+<input id="cedente-nome" placeholder="Nome completo do cedente" type="text"/>
+<div class="signature-line"></div>
+</div>
+<div class="signature-field">
+<label for="sucessor-nome">Sucessor:</label>
+<input id="sucessor-nome" placeholder="Nome completo do sucessor" type="text"/>
+<div class="signature-line"></div>
+</div>
+<div class="signature-field">
+<label for="handover-data">Data do Handover:</label>
+<input id="handover-data" type="date"/>
+</div>
+</div>
+</div>
+<ul class="checklist">
+<li><input id="chk11-1" type="checkbox"/><label for="chk11-1">Declaração de handover preenchida e assinada por ambas as partes.</label></li>
+</ul>
+</div>
+</details>
+</section>
+</main>
+</div>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('#part-ii .checklist input[type="checkbox"]');
+            const totalCheckboxes = checkboxes.length;
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const checklistSections = document.querySelectorAll('#part-ii .checklist-item');
+
+            function updateProgress() {
+                const checkedCheckboxes = document.querySelectorAll('#part-ii .checklist input[type="checkbox"]:checked').length;
+                const percentage = totalCheckboxes > 0 ? (checkedCheckboxes / totalCheckboxes) * 100 : 0;
+                
+                progressBar.style.width = percentage + '%';
+                progressBar.textContent = Math.round(percentage) + '%';
+                progressText.textContent = Math.round(percentage) + '%';
+
+                // Atualiza o estilo do item pai (li)
+                checkboxes.forEach(checkbox => {
+                    const listItem = checkbox.closest('li');
+                    if (listItem) {
+                        if (checkbox.checked) {
+                            listItem.classList.add('checked');
+                        } else {
+                            listItem.classList.remove('checked');
+                        }
+                    }
+                });
+
+                // Atualiza o estilo da seção (details)
+                checklistSections.forEach(section => {
+                    const sectionCheckboxes = section.querySelectorAll('.checklist input[type="checkbox"]');
+                    const allChecked = Array.from(sectionCheckboxes).every(cb => cb.checked);
+                    
+                    if (sectionCheckboxes.length > 0 && allChecked) {
+                        section.classList.add('completed');
+                    } else {
+                        section.classList.remove('completed');
+                    }
+                });
+            }
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateProgress);
+            });
+
+            // Botão de Imprimir
+            document.getElementById('printBtn').addEventListener('click', function() {
+                window.print();
+            });
+
+            // Botão de Baixar
+            document.getElementById('downloadBtn').addEventListener('click', function() {
+                const htmlContent = document.documentElement.outerHTML;
+                const blob = new Blob([htmlContent], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Roteiro_Handover_Documentacao.html';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+
+            // Botão de Compartilhar (abre novo doc e avisa para colar)
+            document.getElementById('shareBtn').addEventListener('click', function(e) {
+                // Previne a navegação padrão, mas mantém a abertura da nova aba
+                e.preventDefault(); 
+                window.open(this.href, '_blank');
+                alert("Um novo Google Doc foi aberto. Para compartilhar, copie o conteúdo desta página (Ctrl+A, Ctrl+C) e cole no novo documento (Ctrl+V). A formatação pode variar.");
+            });
+
+            // Inicializa o progresso no carregamento da página
+            updateProgress();
+        });
+    </script>
+
+</body></html>
