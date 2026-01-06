@@ -431,7 +431,7 @@
 <div class="action-buttons">
 <button class="action-button btn-download" id="downloadBtn"><i class="fas fa-download"></i> Baixar Documento</button>
 <button class="action-button btn-print" id="printBtn"><i class="fas fa-print"></i> Imprimir</button>
-<a class="action-button btn-share" href="https://docs.google.com/document/create" id="shareBtn" target="_blank"><i class="fas fa-file-alt"></i> Compartilhar no Docs</a>
+<a class="action-button btn-share" href="https://polartecnica.sharepoint.com/sites/DiretoriaTech/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FDiretoriaTech%2FShared%20Documents%2FProdutos%20%2D%20Documentos%20Fornecedores%2FDocumentos%20de%20Requisitos%2FEverest&amp;viewid=0718cfbe%2D7e30%2D4fd7%2Db354%2Dba423acfe4cb&amp;ga=1" id="shareBtn" target="_blank"><i class="fas fa-folder-open"></i> Salvar no SharePoint</a>
 <a class="action-button btn-edit" href="https://roteiro-documentacao.vercel.app/"><i class="fas fa-edit"></i> Editar</a>
 </div>
 <section id="part-i">
@@ -689,8 +689,8 @@
                 window.print();
             });
 
-            // Botão de Baixar
-            document.getElementById('downloadBtn').addEventListener('click', function() {
+            // Função auxiliar para gerar PDF
+            function generatePDF(callback) {
                 const element = document.querySelector('.container');
                 const actionButtons = document.querySelector('.action-buttons');
                 
@@ -708,15 +708,27 @@
                 // Gera o PDF e depois restaura os botões
                 html2pdf().set(opt).from(element).save().then(function() {
                     actionButtons.classList.remove('pdf-mode');
+                    if (callback) callback();
                 });
+            }
+
+            // Botão de Baixar
+            document.getElementById('downloadBtn').addEventListener('click', function() {
+                generatePDF();
             });
 
-            // Botão de Compartilhar (abre novo doc e avisa para colar)
+            // Botão de Compartilhar (abre pasta do SharePoint)
             document.getElementById('shareBtn').addEventListener('click', function(e) {
                 // Previne a navegação padrão, mas mantém a abertura da nova aba
                 e.preventDefault(); 
+                
+                // Abre a pasta do SharePoint imediatamente
                 window.open(this.href, '_blank');
-                alert("Um novo Google Doc foi aberto. Para compartilhar, copie o conteúdo desta página (Ctrl+A, Ctrl+C) e cole no novo documento (Ctrl+V). A formatação pode variar.");
+                
+                // Inicia o download do PDF automaticamente
+                generatePDF();
+
+                alert("O download do PDF foi iniciado.\n\nA pasta do SharePoint foi aberta em uma nova guia.\n\nAssim que o download concluir, arraste o arquivo PDF para dentro da pasta do SharePoint.");
             });
 
             // Inicializa o progresso no carregamento da página
